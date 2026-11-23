@@ -1,0 +1,912 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A personal website for Chaudhari Ankit, a direct seller in Vyara, India.">
+    <title>Chaudhari Ankit | Personal Website</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #17231f;
+        --muted: #64736d;
+        --paper: #f5f7f3;
+        --card: #ffffff;
+        --green: #237a5a;
+        --green-dark: #18583f;
+        --line: #e2e9e3;
+        --highlight: #e7f0e8;
+        --portrait: #e3efe4;
+        --portrait-border: #d5e5d8;
+      }
+
+      body[data-theme="dark"] {
+        color-scheme: dark;
+        --ink: #e9f2ec;
+        --muted: #b0c0b6;
+        --paper: #15201b;
+        --card: #202e27;
+        --green: #78c49c;
+        --green-dark: #a0dbb8;
+        --line: #34463c;
+        --highlight: #263a2e;
+        --portrait: #263a2e;
+        --portrait-border: #3a5946;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.6;
+      }
+
+      a {
+        color: var(--green-dark);
+      }
+
+      .page {
+        width: min(100% - 2rem, 960px);
+        margin-inline: auto;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-block: 1.4rem;
+      }
+
+      .brand {
+        color: var(--ink);
+        font-size: 1.05rem;
+        font-weight: 750;
+        text-decoration: none;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1.25rem;
+      }
+
+      nav a {
+        color: var(--muted);
+        font-size: 0.94rem;
+        text-decoration: none;
+      }
+
+      nav a:hover,
+      nav a:focus-visible {
+        color: var(--green-dark);
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .theme-toggle,
+      .fact-button {
+        min-height: 42px;
+        padding: 0.55rem 0.9rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--card);
+        color: var(--ink);
+        cursor: pointer;
+        font-weight: 650;
+      }
+
+      .theme-toggle:hover,
+      .fact-button:hover {
+        border-color: var(--green);
+        color: var(--green-dark);
+      }
+
+      :focus-visible {
+        outline: 3px solid var(--green);
+        outline-offset: 3px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 220px;
+        align-items: center;
+        gap: 3rem;
+        padding-block: clamp(4rem, 10vw, 7rem);
+      }
+
+      .eyebrow {
+        margin: 0 0 0.75rem;
+        color: var(--green);
+        font-size: 0.8rem;
+        font-weight: 750;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 700px;
+        margin-bottom: 1rem;
+        font-size: clamp(2.7rem, 7vw, 5rem);
+        letter-spacing: -0.065em;
+        line-height: 1.04;
+      }
+
+      .intro {
+        max-width: 570px;
+        margin-bottom: 1.7rem;
+        color: var(--muted);
+        font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 46px;
+        align-items: center;
+        justify-content: center;
+        padding: 0.65rem 1.1rem;
+        border-radius: 999px;
+        background: var(--green);
+        color: #fff;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .button:hover,
+      .button:focus-visible {
+        background: var(--green-dark);
+      }
+
+      .portrait {
+        display: grid;
+        width: 200px;
+        aspect-ratio: 1;
+        place-items: center;
+        justify-self: center;
+        border: 1px solid var(--portrait-border);
+        border-radius: 50%;
+        background: var(--portrait);
+        color: var(--green-dark);
+        font-size: 4rem;
+        font-weight: 750;
+        letter-spacing: -0.08em;
+        transition: transform 180ms ease;
+      }
+
+      .portrait img {
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        object-fit: cover;
+      }
+
+      .portrait:hover {
+        transform: rotate(-5deg) scale(1.04);
+      }
+
+      .photo-controls {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 0.9rem;
+      }
+
+      .photo-controls .detail-action[hidden] {
+        display: none;
+      }
+
+      .photo-status {
+        max-width: 220px;
+        margin: 0.65rem 0 0;
+        color: var(--muted);
+        font-size: 0.85rem;
+        text-align: center;
+      }
+
+      section {
+        padding-block: 3.5rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .section-heading {
+        margin-bottom: 1.5rem;
+        font-size: clamp(1.6rem, 4vw, 2.2rem);
+        letter-spacing: -0.04em;
+      }
+
+      .about-copy {
+        max-width: 680px;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+
+      .details {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .detail-card {
+        min-width: 0;
+        padding: 1.25rem;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--card);
+        transition: transform 180ms ease, border-color 180ms ease;
+      }
+
+      .detail-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--green);
+      }
+
+      .detail-card h3 {
+        margin: 0 0 0.35rem;
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .detail-card p {
+        overflow-wrap: anywhere;
+        margin: 0;
+        font-weight: 650;
+      }
+
+      .detail-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .detail-action {
+        min-height: 38px;
+        padding: 0.4rem 0.75rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: transparent;
+        color: var(--ink);
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 650;
+      }
+
+      .detail-action:hover {
+        border-color: var(--green);
+        color: var(--green-dark);
+      }
+
+      .manage-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .manage-bar p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .detail-form {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr auto auto;
+        align-items: end;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+        padding: 1rem;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--card);
+      }
+
+      .detail-form[hidden],
+      .form-field[hidden] {
+        display: none;
+      }
+
+      .form-field label {
+        display: block;
+        margin-bottom: 0.35rem;
+        color: var(--muted);
+        font-size: 0.86rem;
+        font-weight: 700;
+      }
+
+      .form-field input,
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        min-height: 44px;
+        padding: 0.6rem 0.75rem;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--paper);
+        color: var(--ink);
+        font: inherit;
+      }
+
+      .contact-form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+        max-width: 700px;
+      }
+
+      .contact-form .form-field {
+        min-width: 0;
+      }
+
+      .contact-form .message-field,
+      .contact-form .privacy-note,
+      .contact-form .status-message {
+        grid-column: 1 / -1;
+      }
+
+      .contact-form textarea {
+        min-height: 140px;
+        resize: vertical;
+      }
+
+      .contact-form .privacy-note,
+      .contact-form .status-message {
+        margin: 0;
+      }
+
+      .contact-form .button {
+        justify-self: start;
+        border: 0;
+        cursor: pointer;
+      }
+
+      .contact-form .button:disabled {
+        cursor: wait;
+        opacity: 0.7;
+      }
+
+      .honeypot {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+      }
+
+      .save-button {
+        border: 0;
+        cursor: pointer;
+      }
+
+      .status-message {
+        min-height: 1.5rem;
+        margin: 0 0 0.75rem;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .status-message:empty {
+        display: none;
+      }
+
+      .privacy-note {
+        margin: 1rem 0 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      footer {
+        padding-block: 1.5rem 2rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 640px) {
+        header {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        nav {
+          gap: 1rem;
+        }
+
+        .theme-toggle {
+          margin-top: 0.25rem;
+        }
+
+        .hero {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+          padding-top: 3.5rem;
+        }
+
+        .portrait {
+          grid-row: 1;
+          width: 145px;
+          justify-self: start;
+          font-size: 3rem;
+        }
+
+        .details {
+          grid-template-columns: 1fr;
+        }
+
+        .manage-bar {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .detail-form {
+          grid-template-columns: 1fr;
+        }
+
+        .contact-form {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <a class="brand" href="#home">Chaudhari Ankit</a>
+        <nav aria-label="Main navigation">
+          <a href="#about">About</a>
+          <a href="#details">Details</a>
+          <a href="#contact">Contact</a>
+          <a href="#manage">Manage</a>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark mode">Dark mode</button>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero" id="home" aria-labelledby="intro-title">
+          <div>
+            <p class="eyebrow">Hello, I'm</p>
+            <h1 id="intro-title">Chaudhari Ankit</h1>
+            <p class="intro" id="intro-copy">I'm a direct seller based in Vyara, India.</p>
+            <a class="button" href="#details">A little about me</a>
+          </div>
+          <div>
+            <div class="portrait" id="portrait" aria-label="Your initials">CA</div>
+            <div class="photo-controls">
+              <label class="detail-action" for="photo-input">Add profile photo</label>
+              <input id="photo-input" type="file" accept="image/*" hidden>
+              <button class="detail-action" id="remove-photo" type="button" hidden>Remove photo</button>
+            </div>
+            <p class="photo-status" id="photo-status" role="status" aria-live="polite"></p>
+            <p class="photo-status">Saved only in this browser on this device.</p>
+          </div>
+        </section>
+
+        <section id="about" aria-labelledby="about-title">
+          <p class="eyebrow">A bit about me</p>
+          <h2 class="section-heading" id="about-title">Nice to meet you.</h2>
+          <p class="about-copy" id="about-copy">I'm an entrepreneur. I speak English.</p>
+        </section>
+
+        <section id="details" aria-labelledby="details-title">
+          <p class="eyebrow">The basics</p>
+          <h2 class="section-heading" id="details-title">A few details</h2>
+          <div class="details" id="details-list" aria-live="polite"></div>
+        </section>
+
+        <section id="contact" aria-labelledby="contact-title">
+          <p class="eyebrow">Get in touch</p>
+          <h2 class="section-heading" id="contact-title">Send me a message</h2>
+          <p class="about-copy">Fill in your details and your message will be sent directly to me.</p>
+          <form class="contact-form" id="contact-form">
+            <div class="form-field">
+              <label for="visitor-name">Your name</label>
+              <input id="visitor-name" name="name" autocomplete="name" maxlength="100" required>
+            </div>
+            <div class="form-field">
+              <label for="visitor-email">Your email</label>
+              <input id="visitor-email" name="email" type="email" autocomplete="email" maxlength="254" required>
+            </div>
+            <div class="form-field">
+              <label for="visitor-phone">Mobile (optional)</label>
+              <input id="visitor-phone" name="phone" type="tel" autocomplete="tel" maxlength="30">
+            </div>
+            <div class="form-field message-field">
+              <label for="visitor-message">Message</label>
+              <textarea id="visitor-message" name="message" maxlength="3000" required></textarea>
+            </div>
+            <div class="honeypot" aria-hidden="true">
+              <label for="visitor-company">Leave this field empty</label>
+              <input id="visitor-company" name="company" tabindex="-1" autocomplete="off">
+            </div>
+            <p class="privacy-note">Your name, email, optional mobile number, and message will be emailed to the site owner. Please don’t include sensitive information.</p>
+            <p class="status-message" id="contact-status" role="status" aria-live="polite"></p>
+            <button class="button" id="send-message" type="submit">Send message</button>
+          </form>
+        </section>
+
+        <section id="manage" aria-labelledby="manage-title">
+          <p class="eyebrow">Your profile</p>
+          <h2 class="section-heading" id="manage-title">Manage your details</h2>
+          <div class="manage-bar">
+            <p>Edit or remove profile details, or add your own.</p>
+            <button class="button" id="add-detail" type="button">Add a detail</button>
+          </div>
+          <p class="status-message" id="status-message" role="status" aria-live="polite"></p>
+          <form class="detail-form" id="detail-form" hidden>
+            <div class="form-field" id="label-field">
+              <label for="detail-label">Detail name</label>
+              <input id="detail-label" name="label" maxlength="40" required>
+            </div>
+            <div class="form-field">
+              <label for="detail-value">Value</label>
+              <input id="detail-value" name="value" maxlength="300" required>
+            </div>
+            <button class="button save-button" type="submit">Save detail</button>
+            <button class="detail-action" id="cancel-edit" type="button">Cancel</button>
+          </form>
+          <p class="privacy-note">Your profile details are saved only in this browser on this device. Email and mobile are visible to anyone who can view the site.</p>
+        </section>
+
+      </main>
+
+      <footer>
+        <p>© <span id="year">2026</span> Chaudhari Ankit</p>
+      </footer>
+    </div>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const defaultDetails = [
+        { id: "name", label: "Name", value: "Chaudhari Ankit" },
+        { id: "intro", label: "Introduction", value: "I'm a direct seller based in Vyara, India." },
+        { id: "about", label: "About me", value: "I'm an entrepreneur. I speak English." },
+        { id: "location", label: "Location", value: "Vyara, India" },
+        { id: "work", label: "Work or studies", value: "Entrepreneur" },
+        { id: "languages", label: "Languages", value: "English" },
+        { id: "email", label: "Email", value: "ankitvchaudhari@gmail.com" },
+        { id: "mobile", label: "Mobile", value: "+918799680886" }
+      ];
+      const storageKey = "ankit-personal-profile";
+      const photoStorageKey = "ankit-personal-profile-photo";
+      const statusMessage = document.getElementById("status-message");
+      const portrait = document.getElementById("portrait");
+      const photoInput = document.getElementById("photo-input");
+      const removePhotoButton = document.getElementById("remove-photo");
+      const photoStatus = document.getElementById("photo-status");
+      const maxPhotoBytes = 10 * 1024 * 1024;
+      const maxPhotoDataUrlLength = 700 * 1024;
+      let details = defaultDetails;
+      let editingId = null;
+      let nextDetailId = 0;
+      let storageAvailable = true;
+      let removedInterests = false;
+      let profilePhoto = null;
+
+      try {
+        const savedDetails = localStorage.getItem(storageKey);
+        if (savedDetails !== null) {
+          const parsedDetails = JSON.parse(savedDetails);
+          if (!Array.isArray(parsedDetails) || parsedDetails.some((item) =>
+            !item || typeof item.id !== "string" || typeof item.label !== "string" || typeof item.value !== "string"
+          )) {
+            throw new Error("Saved profile data has an invalid format.");
+          }
+          details = parsedDetails.filter((item) => {
+            const isInterest = item.id === "interests" || item.label.trim().toLowerCase() === "interests";
+            removedInterests ||= isInterest;
+            return !isInterest;
+          });
+          const defaultAbout = details.find((item) => item.id === "about");
+          if (defaultAbout?.value === "I'm an entrepreneur who enjoys cricket. I speak English.") {
+            defaultAbout.value = "I'm an entrepreneur. I speak English.";
+            removedInterests = true;
+          }
+        }
+      } catch (error) {
+        storageAvailable = false;
+        statusMessage.textContent = `Could not load saved profile data: ${error.message} Your default details are shown.`;
+      }
+
+      try {
+        const savedPhoto = localStorage.getItem(photoStorageKey);
+        if (savedPhoto?.startsWith("data:image/jpeg;base64,")) {
+          profilePhoto = savedPhoto;
+        }
+      } catch (error) {
+        photoStatus.textContent = `Could not load your saved photo: ${error.message}`;
+      }
+
+      function renderPhoto() {
+        portrait.replaceChildren();
+        if (profilePhoto) {
+          const image = document.createElement("img");
+          image.src = profilePhoto;
+          image.alt = `Profile photo of ${details.find((item) => item.id === "name")?.value || "profile owner"}`;
+          portrait.append(image);
+          portrait.setAttribute("aria-label", "Profile photo");
+          removePhotoButton.hidden = false;
+        } else {
+          portrait.textContent = getInitials();
+          portrait.setAttribute("aria-label", "Your initials");
+          removePhotoButton.hidden = true;
+        }
+      }
+
+      function getInitials() {
+        const name = details.find((item) => item.id === "name")?.value || "Your Name";
+        return name.trim().split(/\s+/).slice(0, 2).map((part) => part[0] || "").join("").toUpperCase() || "?";
+      }
+
+      function resizePhoto(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onerror = () => reject(new Error("Could not read the selected image."));
+          reader.onload = () => {
+            const image = new Image();
+            image.onerror = () => reject(new Error("The selected file is not a supported image."));
+            image.onload = () => {
+              const size = 512;
+              const cropSize = Math.min(image.naturalWidth, image.naturalHeight);
+              const cropX = (image.naturalWidth - cropSize) / 2;
+              const cropY = (image.naturalHeight - cropSize) / 2;
+              const canvas = document.createElement("canvas");
+              canvas.width = size;
+              canvas.height = size;
+              const context = canvas.getContext("2d");
+              if (!context) {
+                reject(new Error("Your browser could not process this image."));
+                return;
+              }
+              context.drawImage(image, cropX, cropY, cropSize, cropSize, 0, 0, size, size);
+              resolve(canvas.toDataURL("image/jpeg", 0.82));
+            };
+            image.src = reader.result;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      photoInput.addEventListener("change", async () => {
+        const file = photoInput.files?.[0];
+        photoInput.value = "";
+        photoStatus.textContent = "";
+        if (!file) return;
+        if (!file.type.startsWith("image/")) {
+          photoStatus.textContent = "Choose an image file to use as your profile photo.";
+          return;
+        }
+        if (file.size > maxPhotoBytes) {
+          photoStatus.textContent = "Choose an image smaller than 10 MB.";
+          return;
+        }
+        try {
+          const resizedPhoto = await resizePhoto(file);
+          if (resizedPhoto.length > maxPhotoDataUrlLength) {
+            photoStatus.textContent = "This image could not be compressed enough. Try a smaller image.";
+            return;
+          }
+          localStorage.setItem(photoStorageKey, resizedPhoto);
+          profilePhoto = resizedPhoto;
+          renderPhoto();
+          photoStatus.textContent = "Profile photo saved in this browser.";
+        } catch (error) {
+          photoStatus.textContent = `Could not save your profile photo: ${error.message}`;
+        }
+      });
+
+      removePhotoButton.addEventListener("click", () => {
+        try {
+          localStorage.removeItem(photoStorageKey);
+          profilePhoto = null;
+          renderPhoto();
+          photoStatus.textContent = "Profile photo removed.";
+        } catch (error) {
+          photoStatus.textContent = `Could not remove your profile photo: ${error.message}`;
+        }
+      });
+
+      function saveDetails() {
+        if (!storageAvailable) {
+          statusMessage.textContent = "Changes are shown for this visit, but could not be saved in this browser.";
+          return;
+        }
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(details));
+          statusMessage.textContent = "Your profile changes have been saved in this browser.";
+        } catch (error) {
+          storageAvailable = false;
+          statusMessage.textContent = `Could not save your profile: ${error.message} Changes remain visible until you leave this page.`;
+        }
+      }
+
+      function renderDetails() {
+        const list = document.getElementById("details-list");
+        list.replaceChildren();
+        const profileOrder = ["name", "intro", "about", "location", "work", "languages", "email", "mobile"];
+        const orderedDetails = [...details].sort((first, second) => {
+          const firstIndex = profileOrder.indexOf(first.id);
+          const secondIndex = profileOrder.indexOf(second.id);
+          return (firstIndex === -1 ? profileOrder.length : firstIndex) -
+            (secondIndex === -1 ? profileOrder.length : secondIndex);
+        });
+        for (const detail of orderedDetails) {
+          const card = document.createElement("article");
+          card.className = "detail-card";
+          const heading = document.createElement("h3");
+          heading.textContent = detail.label;
+          let value;
+          if (detail.id === "email" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(detail.value)) {
+            value = document.createElement("a");
+            value.href = `mailto:${detail.value}`;
+            value.textContent = detail.value;
+          } else if (detail.id === "mobile" && /^[+()\d.\-\s]+$/.test(detail.value)) {
+            value = document.createElement("a");
+            value.href = `tel:${detail.value.replace(/[^\d+]/g, "")}`;
+            value.textContent = detail.value;
+          } else {
+            value = document.createElement("p");
+            value.textContent = detail.value;
+          }
+          const actions = document.createElement("div");
+          actions.className = "detail-actions";
+          const editButton = document.createElement("button");
+          editButton.className = "detail-action";
+          editButton.type = "button";
+          editButton.textContent = "Edit";
+          editButton.setAttribute("aria-label", `Edit ${detail.label}`);
+          editButton.addEventListener("click", () => openEditor(detail));
+          actions.append(editButton);
+          const deleteButton = document.createElement("button");
+          deleteButton.className = "detail-action";
+          deleteButton.type = "button";
+          deleteButton.textContent = "Delete";
+          deleteButton.setAttribute("aria-label", `Delete ${detail.label}`);
+          deleteButton.addEventListener("click", () => {
+            details = details.filter((item) => item.id !== detail.id);
+            saveDetails();
+            if (removedInterests) saveDetails();
+            renderDetails();
+          });
+          actions.append(deleteButton);
+          card.append(heading, value, actions);
+          list.append(card);
+        }
+        updateProfile();
+      }
+
+      function updateProfile() {
+        const valueFor = (id, fallback) => details.find((item) => item.id === id)?.value || fallback;
+        const name = valueFor("name", "Your Name");
+        document.getElementById("intro-title").textContent = name;
+        document.querySelector(".brand").textContent = name;
+        document.getElementById("intro-copy").textContent = valueFor("intro", "Add a short introduction about yourself.");
+        document.getElementById("about-copy").textContent = valueFor("about", "Add a few details about yourself.");
+        if (!profilePhoto) portrait.textContent = getInitials();
+      }
+
+      const detailForm = document.getElementById("detail-form");
+      const labelInput = document.getElementById("detail-label");
+      const valueInput = document.getElementById("detail-value");
+
+      function openEditor(detail) {
+        editingId = detail ? detail.id : null;
+        detailForm.hidden = false;
+        document.getElementById("label-field").hidden = Boolean(detail);
+        labelInput.required = !detail;
+        labelInput.value = detail ? detail.label : "";
+        valueInput.value = detail ? detail.value : "";
+        detailForm.querySelector(".save-button").textContent = detail ? "Update detail" : "Add detail";
+        valueInput.focus();
+      }
+
+      function closeEditor() {
+        detailForm.reset();
+        detailForm.hidden = true;
+        editingId = null;
+      }
+
+      document.getElementById("add-detail").addEventListener("click", () => openEditor(null));
+      document.getElementById("cancel-edit").addEventListener("click", closeEditor);
+      detailForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const value = valueInput.value.trim();
+        if (!value) {
+          valueInput.focus();
+          return;
+        }
+        if (editingId) {
+          const detail = details.find((item) => item.id === editingId);
+          if (detail) detail.value = value;
+        } else {
+          const label = labelInput.value.trim();
+          if (!label) {
+            labelInput.focus();
+            return;
+          }
+          const builtInIds = {
+            name: "name",
+            introduction: "intro",
+            "about me": "about",
+            location: "location",
+            "work or studies": "work",
+            interests: "interests",
+            languages: "languages",
+            email: "email",
+            mobile: "mobile"
+          };
+          const builtInId = builtInIds[label.toLowerCase()];
+          const id = builtInId && !details.some((item) => item.id === builtInId)
+            ? builtInId
+            : `custom-${Date.now()}-${nextDetailId++}`;
+          details.push({ id, label, value });
+        }
+        closeEditor();
+        saveDetails();
+        renderPhoto();
+        renderDetails();
+      });
+
+      const themeToggle = document.getElementById("theme-toggle");
+      themeToggle.addEventListener("click", () => {
+        const isDark = document.body.dataset.theme !== "dark";
+        document.body.dataset.theme = isDark ? "dark" : "light";
+        themeToggle.textContent = isDark ? "Light mode" : "Dark mode";
+        themeToggle.setAttribute("aria-pressed", String(isDark));
+        themeToggle.setAttribute("aria-label", `Switch to ${isDark ? "light" : "dark"} mode`);
+      });
+
+      const contactForm = document.getElementById("contact-form");
+      const contactStatus = document.getElementById("contact-status");
+      const sendMessageButton = document.getElementById("send-message");
+      contactForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        contactStatus.textContent = "";
+        sendMessageButton.disabled = true;
+        sendMessageButton.textContent = "Sending…";
+        const formData = new FormData(contactForm);
+        const submission = Object.fromEntries(formData.entries());
+        try {
+          const response = await fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(submission)
+          });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.error || "The message could not be sent.");
+          contactForm.reset();
+          contactStatus.textContent = "Thanks! Your message has been sent.";
+        } catch (error) {
+          contactStatus.textContent = error.message || "Unable to send your message. Please try again later.";
+        } finally {
+          sendMessageButton.disabled = false;
+          sendMessageButton.textContent = "Send message";
+        }
+      });
+
+      renderDetails();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "ankit-personal-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal website with an email contact form",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "nodemailer": "^6.10.1"
+  }
+}
